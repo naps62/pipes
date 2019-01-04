@@ -5,10 +5,9 @@ using System.Linq;
 
 public class CellInitializer : MonoBehaviour {
   private static IEnumerable<(string id, string spritePath)> tiles = new List<(string, string)>() {
-    ("baila", "Sprites/baila"),
-    ("moonz", "Sprites/moonz"),
-    ("roberto", "Sprites/roberto"),
-    ("pedro", "Sprites/pedro")
+    ("red", "Sprites/red"),
+    ("green", "Sprites/green"),
+    ("blue", "Sprites/blue")
     };
 
   void Awake() {
