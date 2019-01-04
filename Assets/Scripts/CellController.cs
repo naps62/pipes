@@ -14,5 +14,6 @@ public class CellController : MonoBehaviour
 
     void OnMouseDown() {
         Debug.Log("here");
+        GetComponent<Animator>().SetTrigger("Active");
     }
 }
