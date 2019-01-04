@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rows: 10
   cols: 10
-  cellPrefab: {fileID: 2621129444762828776, guid: 1e218279aab5f0336b66bc621a8a5c2b,
+  cellPrefab: {fileID: 4497114548056774157, guid: 1e218279aab5f0336b66bc621a8a5c2b,
     type: 3}
   gridSize: {x: 10, y: 10}
 --- !u!4 &60538554
