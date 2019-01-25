@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class CellController : MonoBehaviour
 {
-    // void Update() {
-    //     if (Input.GetMouseButtonDown(0)) {
-    //         Debug.Log("Click");
-
-    //         Debug.Log(transform.position.x);
-    //     }
-    // }
-
     void OnMouseDown() {
         GetComponent<Animator>().SetTrigger("Active");
+        transform.Rotate(Vector3.forward * 90);
     }
 }
