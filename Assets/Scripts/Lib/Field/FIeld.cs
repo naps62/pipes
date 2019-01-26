@@ -5,14 +5,11 @@ namespace FieldN {
     public int width, height;
     public bool[, ] rightGates;
     public bool[, ] downGates;
-    public Cell[, ] cells;
-
-    public enum Direction { UP, DOWN, LEFT, RIGHT }
+    public enum Direction { NONE, UP, DOWN, LEFT, RIGHT }
 
     public Field(int width, int height) {
       this.width = width;
       this.height = height;
-      this.cells = new Cell[width, height];
       this.rightGates = new bool[width - 1, height];
       this.downGates = new bool[width, height - 1];
     }
