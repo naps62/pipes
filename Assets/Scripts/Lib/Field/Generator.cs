@@ -7,6 +7,7 @@ using UnityEngine;
 namespace FieldN {
   public class Generator {
     public static Field GenerateWithRecursiveBacktracking(int width, int height) {
+      // based on http://weblog.jamisbuck.org/2010/12/27/maze-generation-recursive-backtracking
       var field = new Field(width, height);
 
       var visited = new bool[width, height];
