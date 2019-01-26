@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellGizmos : MonoBehaviour {
+public class CellDebug : MonoBehaviour {
   public void OnDrawGizmos () {
     var renderer = this.GetComponent<SpriteRenderer> ();
 

@@ -10,6 +10,8 @@ public class PipeGrid : MonoBehaviour {
 
   void Start() {
     InitCells();
+
+    SAW.Generate(5, 5);
   }
 
   void OnDrawGizmos() {
