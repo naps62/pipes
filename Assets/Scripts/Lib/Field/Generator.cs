@@ -15,19 +15,24 @@ namespace FieldN {
       var x = UnityEngine.Random.Range(0, width);
       var y = UnityEngine.Random.Range(0, height);
       int previousX, previousY;
+      Field.Direction direction;
 
+      var visitedCount = 1;
       visited[x, y] = true;
       stack.Push((x, y));
+      Debug.Log("visiting " + x + ", " + y);
 
-      while (stack.Count > 0) {
+      while (visitedCount < width * height) {
         (previousX, previousY) = (x, y);
-        var direction = getRandomUnvisitedNeighbour(visited, previousX, previousY, width, height);
+        (direction, x, y) = getRandomUnvisitedNeighbour(visited, previousX, previousY, width, height);
 
         if (direction == Field.Direction.NONE) {
           (x, y) = stack.Pop();
         } else {
           field.SetGate(previousX, previousY, direction, true);
+          Debug.Log("visiting " + x + ", " + y);
           visited[x, y] = true;
+          visitedCount++;
           stack.Push((x, y));
         }
       }
@@ -52,7 +57,7 @@ namespace FieldN {
       }
     }
 
-    private static Field.Direction getRandomUnvisitedNeighbour(bool[, ] visited, int currentX, int currentY, int width, int height) {
+    private static(Field.Direction, int, int) getRandomUnvisitedNeighbour(bool[, ] visited, int currentX, int currentY, int width, int height) {
       IEnumerable<Field.Direction> options = new List<Field.Direction>() {
         Field.Direction.UP, Field.Direction.RIGHT, Field.Direction.DOWN, Field.Direction.LEFT
       };
@@ -86,10 +91,10 @@ namespace FieldN {
           continue;
         }
 
-        return direction;
+        return (direction, nextX, nextY);
       }
 
-      return Field.Direction.NONE;
+      return (Field.Direction.NONE, -1, -1);
     }
   }
 }

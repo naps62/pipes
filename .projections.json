@@ -1,4 +1,0 @@
-{
-  "Assets/Scripts/*.cs": {"alternate": "Assets/Editor/Tests/{}Test.cs"},
-  "Assets/Editor/Tests/*Test.cs": {"alternate": "Assets/Scripts/{}.cs"}
-}
