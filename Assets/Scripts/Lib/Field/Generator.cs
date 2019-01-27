@@ -20,7 +20,6 @@ namespace FieldN {
       var visitedCount = 1;
       visited[x, y] = true;
       stack.Push((x, y));
-      Debug.Log("visiting " + x + ", " + y);
 
       while (visitedCount < width * height) {
         (previousX, previousY) = (x, y);
@@ -30,7 +29,6 @@ namespace FieldN {
           (x, y) = stack.Pop();
         } else {
           field.SetGate(previousX, previousY, direction, true);
-          Debug.Log("visiting " + x + ", " + y);
           visited[x, y] = true;
           visitedCount++;
           stack.Push((x, y));
@@ -47,6 +45,9 @@ namespace FieldN {
 
       return field;
     }
+    public static Field GenerateFullyClosedField(int width, int height) {
+      return new Field(width, height);
+    }
 
     private static void fillAllInnerGates(Field field) {
       for (int i = 0; i < field.width; ++i) {
@@ -62,25 +63,25 @@ namespace FieldN {
         Field.Direction.UP, Field.Direction.RIGHT, Field.Direction.DOWN, Field.Direction.LEFT
       };
 
-      var shuffledOptions = options.OrderBy(x => Guid.NewGuid());
+      var shuffledOptions = options.OrderBy(x => UnityEngine.Random.value);
 
       foreach (Field.Direction direction in shuffledOptions) {
         var nextX = currentX;
         var nextY = currentY;
 
         switch (direction) {
-        case Field.Direction.UP:
-          --nextX;
-          break;
-        case Field.Direction.RIGHT:
-          ++nextY;
-          break;
-        case Field.Direction.DOWN:
-          ++nextX;
-          break;
-        case Field.Direction.LEFT:
-          --nextY;
-          break;
+          case Field.Direction.UP:
+            --nextY;
+            break;
+          case Field.Direction.RIGHT:
+            ++nextX;
+            break;
+          case Field.Direction.DOWN:
+            ++nextY;
+            break;
+          case Field.Direction.LEFT:
+            --nextX;
+            break;
         }
 
         if (nextX < 0 || nextX >= width || nextY < 0 || nextY >= height) {

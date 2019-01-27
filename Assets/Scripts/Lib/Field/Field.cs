@@ -39,18 +39,18 @@ namespace FieldN {
       if (x >= width || y >= height) { return false; }
 
       switch (direction) {
-      case Direction.UP:
-        if (y <= 0) { return false; }
-        break;
-      case Direction.DOWN:
-        if (y >= width - 1) { return false; }
-        break;
-      case Direction.LEFT:
-        if (x <= 0) { return false; }
-        break;
-      case Direction.RIGHT:
-        if (x >= height - 1) { return false; }
-        break;
+        case Direction.UP:
+          if (y <= 0) { return false; }
+          break;
+        case Direction.DOWN:
+          if (y >= height - 1) { return false; }
+          break;
+        case Direction.LEFT:
+          if (x <= 0) { return false; }
+          break;
+        case Direction.RIGHT:
+          if (x >= width - 1) { return false; }
+          break;
       }
 
       return true;
@@ -61,23 +61,23 @@ namespace FieldN {
       bool[, ] gateList = null;
 
       switch (direction) {
-      case Direction.UP:
-        --gateY;
-        break;
-      case Direction.LEFT:
-        --gateX;
-        break;
+        case Direction.UP:
+          --gateY;
+          break;
+        case Direction.LEFT:
+          --gateX;
+          break;
       }
 
       switch (direction) {
-      case Direction.LEFT:
-      case Direction.RIGHT:
-        gateList = rightGates;
-        break;
-      case Direction.UP:
-      case Direction.DOWN:
-        gateList = downGates;
-        break;
+        case Direction.LEFT:
+        case Direction.RIGHT:
+          gateList = rightGates;
+          break;
+        case Direction.UP:
+        case Direction.DOWN:
+          gateList = downGates;
+          break;
       }
 
       return (gateList, gateX, gateY);

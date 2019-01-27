@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FieldN;
@@ -46,8 +47,9 @@ namespace Tests {
 
     [Test, Timeout(2000)]
     public void RecursiveBacktrackingFillsAllCells() {
-      var width = 3;
-      var height = 3;
+      UnityEngine.Random.InitState(43);
+      var width = 10;
+      var height = 10;
 
       var field = Generator.GenerateWithRecursiveBacktracking(width, height);
 
@@ -60,20 +62,21 @@ namespace Tests {
       // flood the field again
       visited[x, y] = true;
       var visitedCount = 1;
-      stack.Push((x, y));
+      int previousX = x, previousY = y;
+      var i = 1;
 
-          Debug.Log("checking " + x + ", " + y);
-      while (visitedCount < width * height) {
-        (x, y) = getUnvisitedNeighbour(field, visited, x, y, width, height);
+      while (visitedCount < width * height && i < 200) {
+        ++i;
+        (x, y) = getUnvisitedNeighbour(field, visited, previousX, previousY, width, height);
 
         if (x == -1) {
-          (x, y) = stack.Pop();
-          Debug.Log("backtracking to " + x + ", " + y);
+          (previousX, previousY) = stack.Pop();
         } else {
-          Debug.Log("checking " + x + ", " + y);
+          stack.Push((previousX, previousY));
           visited[x, y] = true;
+          previousX = x;
+          previousY = y;
           visitedCount++;
-          stack.Push((x, y));
         }
       }
 
@@ -89,13 +92,12 @@ namespace Tests {
         (x + 1, y, Field.Direction.RIGHT)
       };
 
-      foreach((int x, int y, Field.Direction direction) option in options) {
-        Debug.Log("trying " + option.x + ", " + option.y + " " + option.direction + " " + field.GetGate(x, y, option.direction));
+      foreach ((int x, int y, Field.Direction direction) option in options) {
         if (field.GetGate(x, y, option.direction) && !visited[option.x, option.y]) {
           return (option.x, option.y);
         }
       }
-    
+
       return (-1, -1);
     }
   }
