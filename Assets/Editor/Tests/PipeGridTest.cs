@@ -11,8 +11,8 @@ namespace Tests {
       var obj = this.buildPipeGrid();
       var grid = obj.GetComponent<PipeGrid>();
 
-      grid.rows = 5;
-      grid.cols = 5;
+      grid.width = 5;
+      grid.height = 5;
       grid.gridSize = new Vector2(10, 10);
 
       grid.InitCells();
@@ -22,7 +22,7 @@ namespace Tests {
 
       // all cells are in different positions
       var positions = new HashSet<Vector3>();
-      foreach(Transform child in obj.transform) {
+      foreach (Transform child in obj.transform) {
         positions.Add(child.transform.position);
       }
       Assert.AreEqual(positions.Count, 25);
@@ -37,15 +37,11 @@ namespace Tests {
 
       PipeGrid grid = obj.GetComponent<PipeGrid>();
       grid.cellPrefab = new GameObject();
-      grid.rows = 5;
-      grid.cols = 5;
+      grid.cellPrefab.AddComponent<CellInitializer>();
+      grid.width = 5;
+      grid.height = 5;
 
       var texture = new Texture2D(4, 4, TextureFormat.DXT1, false);
-      // grid.sprites[0] = Sprite.Create(
-      //     texture,
-      //     new Rect(0, 0, texture.width, texture.height),
-      //     Vector2.zero
-      //     );
 
       return obj;
     }

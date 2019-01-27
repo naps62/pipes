@@ -8,12 +8,6 @@ public class CellController : MonoBehaviour {
     private bool rotating = false;
     private static Vector3 direction = Vector3.forward * 90;
 
-    void Awake() {
-        initialRotation = Random.Range(0, 4);
-
-        StartCoroutine(Rotate(this.transform, direction * initialRotation, 0));
-    }
-
     void OnMouseDown() {
         if (!rotating) {
             StartCoroutine(Rotate(transform, direction, duration));

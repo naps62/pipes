@@ -4,30 +4,22 @@ using System.Linq;
 using UnityEngine;
 
 public class CellInitializer : MonoBehaviour {
-  private static IEnumerable < (string id, string spritePath) > tiles = new List < (string, string) > () {
-    ("line", "Sprites/pipe_line"),
-    ("t", "Sprites/pipe_t"),
-    ("cross", "Sprites/pipe_cross"),
-    ("turn", "Sprites/pipe_turn"),
-    ("end", "Sprites/pipe_end")
-  };
+  private enum Type { LINE, T, CROSS, TURN, END }
 
-  void Awake() {
-    // get a random tile
-    var tile = shuffle(tiles).ElementAt(0);
-
-    this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(tile.spritePath);
-  }
+  private Type type;
 
   void Start() {
-    // scale down the element according to the sprite size
-    transform.localScale = (Vector2) transform.localScale / GetComponent<SpriteRenderer>().sprite.bounds.size;
+    var bounds = transform.GetChild(0).GetComponent<SpriteRenderer>().sprite.bounds.size;
 
-    // set the box collider size
-    GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().sprite.bounds.size;
+    // scale down the element according to the sprite size
+    transform.localScale = (Vector2) transform.localScale / bounds;
+    GetComponent<BoxCollider2D>().size = bounds;
   }
 
-  private IEnumerable<T> shuffle<T>(IEnumerable<T> list) {
-    return list.OrderBy(x => Guid.NewGuid());
+  public void SetGates((bool up, bool right, bool down, bool left) gates) {
+    if (gates.up) transform.Find("Cell_End_Up").gameObject.SetActive(true);
+    if (gates.right) transform.Find("Cell_End_Right").gameObject.SetActive(true);
+    if (gates.down) transform.Find("Cell_End_Down").gameObject.SetActive(true);
+    if (gates.left) transform.Find("Cell_End_Left").gameObject.SetActive(true);
   }
 }

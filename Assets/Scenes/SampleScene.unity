@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3237ae6dcd74755ab040a14c5dab7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 6
-  cols: 6
+  width: 5
+  height: 5
   cellPrefab: {fileID: 4497114548056774157, guid: 1e218279aab5f0336b66bc621a8a5c2b,
     type: 3}
   gridSize: {x: 10, y: 10}

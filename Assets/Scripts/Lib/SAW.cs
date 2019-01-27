@@ -26,7 +26,6 @@ public class SAW {
       points.Add(new Point(i, cols - 1));
     }
 
-    DebugPoints(points);
     return points;
   }
 

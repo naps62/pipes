@@ -24,6 +24,15 @@ namespace FieldN {
       return list[gateX, gateY];
     }
 
+    public(bool, bool, bool, bool) GetGates(int x, int y) {
+      return (
+        GetGate(x, y, Direction.UP),
+        GetGate(x, y, Direction.RIGHT),
+        GetGate(x, y, Direction.DOWN),
+        GetGate(x, y, Direction.LEFT)
+      );
+    }
+
     public void SetGate(int x, int y, Direction direction, bool value) {
       if (!checkGateBounds(x, y, direction)) {
         return;

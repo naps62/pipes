@@ -51,5 +51,15 @@ namespace Tests {
 
       Assert.False(field.GetGate(0, 0, Field.Direction.LEFT));
     }
+
+    [Test]
+    public void GetGatesTest() {
+      var field = new Field(3, 3);
+
+      field.SetGate(1, 1, Field.Direction.UP, true);
+      field.SetGate(1, 1, Field.Direction.DOWN, true);
+
+      Assert.AreEqual(field.GetGates(1, 1), (true, false, true, false));
+    }
   }
 }
