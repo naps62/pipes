@@ -9,6 +9,7 @@ public class CellController : MonoBehaviour {
     private static Vector3 direction = Vector3.forward * 90;
 
     void OnMouseDown() {
+        GetComponent<Animator>().SetTrigger("Active");
         if (!rotating) {
             StartCoroutine(Rotate(transform, direction, duration));
         }
